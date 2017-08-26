@@ -54,7 +54,7 @@ class SavePerson(APIView):
             'active': True
         }
 
-        client = MongoClient(host='127.0.0.1', port=27018)
+        client = MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
         db = client['drone']
 
         api_result = APIResult()
@@ -92,7 +92,7 @@ class PersonList(APIView):
 
     def get(self, request):
 
-        client = MongoClient(host='127.0.0.1', port=27018)
+        client = MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
         db = client['drone']
 
         api_result = APIResult()
@@ -130,7 +130,7 @@ class PersonDelete(APIView):
 
         _id = request.POST.get('id')
 
-        client = MongoClient(host='127.0.0.1', port=27018)
+        client = MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
         db = client['drone']
 
         api_result = APIResult()
@@ -158,7 +158,7 @@ class SaveEvent(APIView):
         checked_person_list = request.POST.get('checked_person_list', [])
         checked_person_list = json.loads(checked_person_list)
 
-        client = MongoClient(host='127.0.0.1', port=27018)
+        client = MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
         db = client['drone']
 
         attendance_count, g_count, k_count, y_count, b_count = (0,) * 5
@@ -261,7 +261,7 @@ class SaveEvent(APIView):
 class EventList(APIView):
 
     def get(self, request):
-        client = MongoClient(host='127.0.0.1', port=27018)
+        client = MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
         db = client['drone']
 
         api_result = APIResult()
@@ -317,7 +317,7 @@ class SaveProduct(APIView):
             'active': True
         }
 
-        client = MongoClient(host='127.0.0.1', port=27018)
+        client = MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
         db = client['drone']
 
         api_result = APIResult()
@@ -350,7 +350,7 @@ class ProductUpdate(APIView):
         _id = request.POST.get('id')
         active = request.POST.get('active')
 
-        client = MongoClient(host='127.0.0.1', port=27018)
+        client = MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
         db = client['drone']
 
         api_result = APIResult()
@@ -383,7 +383,7 @@ class ProductUpdate(APIView):
 class ProductList(APIView):
     def get(self, request):
 
-        client = MongoClient(host='127.0.0.1', port=27018)
+        client = MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
         db = client['drone']
 
         api_result = APIResult()
@@ -412,7 +412,7 @@ class EventAttendanceUpdate(APIView):
         product_id = request.POST.get('product_id')
         event_id = request.POST.get('event_id')
 
-        client = MongoClient(host='127.0.0.1', port=27018)
+        client = MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
         db = client['drone']
 
         api_result = APIResult()
@@ -496,7 +496,7 @@ class EventDelete(APIView):
 
         _id = request.POST.get('id')
 
-        client = MongoClient(host='127.0.0.1', port=27018)
+        client = MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
         db = client['drone']
 
         api_result = APIResult()
@@ -535,7 +535,7 @@ class EventDelete(APIView):
 class PersonInitCount(APIView):
     def post(self, request):
 
-        client = MongoClient(host='127.0.0.1', port=27018)
+        client = MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
         db = client['drone']
 
         api_result = APIResult()
@@ -556,7 +556,7 @@ class PersonInfo(APIView):
     def get(self, request):
         _id = request.GET.get('id')
 
-        client = MongoClient(host='127.0.0.1', port=27018)
+        client = MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
         db = client['drone']
 
         api_result = APIResult()
@@ -600,7 +600,7 @@ class PersonUsePoint(APIView):
         _id = request.POST.get('id')
         use_point = int(request.POST.get('use_point', 0))
 
-        client = MongoClient(host='127.0.0.1', port=27018)
+        client = MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
         db = client['drone']
 
         api_result = APIResult()

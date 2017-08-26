@@ -7,10 +7,17 @@ For more information on this file, see
 https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/
 """
 
-import os
 
+import os
+import socket
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "drone.settings")
+if os.environ.get('DJANGO_SETTINGS_MODULE') is None:
+    if socket.gethostname() == 'ec2-52-78-93-33.ap-northeast-2.compute.amazonaws.com':
+        print('production setting')
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'drone.settings.production')
+    else:
+        print('local setting')
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'drone.settings.local')
 
 application = get_wsgi_application()

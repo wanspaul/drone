@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 import os
 import sys
+import socket
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "drone.settings")
+    if socket.gethostname() == 'ec2-52-78-93-33.ap-northeast-2.compute.amazonaws.com':
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "drone.settings.production")
+    else:
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "drone.settings.local")
 
     from django.core.management import execute_from_command_line
 
