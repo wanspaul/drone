@@ -1,5 +1,6 @@
 import * as eventTypes from './EventTypes';
 import * as personTypes from './PersonTypes';
+import {API_URL} from './config';
 import axios from 'axios';
 
 
@@ -55,7 +56,7 @@ export const onClickEventSave = (event_obj, callback) => {
         // console.log('action');
         // console.log(JSON.stringify(event_obj.checked_person_list));
         form_data.append('checked_person_list', JSON.stringify(event_obj.checked_person_list));
-        return axios.post('http://localhost:8000/api/save_event', form_data).then(
+        return axios.post(API_URL + '/api/save_event', form_data).then(
             response => {
                 dispatch(saveEventSuccess(response.data));
                 dispatch(initPersonAttendance());
@@ -107,7 +108,7 @@ export const onClickProductSave = (product_obj) => {
         dispatch(saveProduct());
         const form_data = new FormData();
         form_data.append('name', product_obj.name);
-        return axios.post('http://localhost:8000/api/save_product', form_data).then(
+        return axios.post(API_URL + '/api/save_product', form_data).then(
             response => {
                 dispatch(saveProductSuccess(response.data));
             }
@@ -125,7 +126,7 @@ export const getEventList = () => {
     
     return (dispatch) => {
         dispatch(eventList());
-        return axios.get('http://localhost:8000/api/event_list').then(
+        return axios.get(API_URL + '/api/event_list').then(
             response => {
                 dispatch(eventListSuccess(response.data));
             }
@@ -161,7 +162,7 @@ export const getProductList = () => {
     
     return (dispatch) => {
         dispatch(productList());
-        return axios.get('http://localhost:8000/api/product_list').then(
+        return axios.get(API_URL + '/api/product_list').then(
             response => {
                 dispatch(productListSuccess(response.data));
             }
@@ -218,7 +219,7 @@ export const onUpdateProduct = (idx, product_obj) => {
         const form_data = new FormData();
         form_data.append('id', product_obj.product_id);
         form_data.append('active', product_obj.active);
-        return axios.post('http://localhost:8000/api/product_update', form_data).then(
+        return axios.post(API_URL + '/api/product_update', form_data).then(
             response => {
                 dispatch(updateProductSuccess(response.data, idx));
             }
@@ -279,7 +280,7 @@ export const onClickSave = (person_obj) => {
         form_data.append('name', person_obj.name);
         form_data.append('phone', person_obj.phone);
         form_data.append('group', person_obj.group);
-        return axios.post('http://localhost:8000/api/save_person', form_data).then(
+        return axios.post(API_URL + '/api/save_person', form_data).then(
             response => {
                 // dispatch(savePersonSuccess(response.data));
                 dispatch(getPersonList());
@@ -300,7 +301,7 @@ export const getPersonList = () => {
     
     return (dispatch) => {
         dispatch(personList());
-        return axios.get('http://localhost:8000/api/person_list').then(
+        return axios.get(API_URL + '/api/person_list').then(
             response => {
                 dispatch(personListSuccess(response.data));
             }
@@ -364,7 +365,7 @@ export const onChangePointUse = (e) => {
 export const getPersonInfo = (id) => {
     return (dispatch) => {
         dispatch(personInfo());
-        return axios.get('http://localhost:8000/api/person_info?id='+id).then(
+        return axios.get(API_URL + '/api/person_info?id='+id).then(
             response => {
                 dispatch(personInfoSuccess(response.data));
                 dispatch(onModalShow());
@@ -384,8 +385,6 @@ export const usePoint = () => {
 }
 
 export const usePointSuccess = (response) => {
-    console.log('userPointSuccess');
-    console.log(response);
     return {
         type: personTypes.USE_POINT_SUCCESS,
         person: response.data.person,
@@ -405,7 +404,7 @@ export const onUsePoint = (use_point_obj) => {
         const form_data = new FormData();
         form_data.append('id', use_point_obj.person_id);
         form_data.append('use_point', use_point_obj.use_point);
-        return axios.post('http://localhost:8000/api/person_use_point', form_data).then(
+        return axios.post(API_URL + '/api/person_use_point', form_data).then(
             response => {
                 dispatch(usePointSuccess(response.data));
                 dispatch(getPersonList());
@@ -442,7 +441,7 @@ export const onSignIn = (password) => {
         const form_data = new FormData();
         form_data.append('password', password);
 
-        return axios.post('http://localhost:8000/api/sign_in', form_data).then(
+        return axios.post(API_URL + '/api/sign_in', form_data).then(
             response => {
                 if(response.data.status == 0) {
                     dispatch(signInSuccess());
@@ -505,7 +504,7 @@ export const onDeletePerson = (id, idx) => {
         dispatch(personDelete());
         const form_data = new FormData();
         form_data.append('id', id);
-        return axios.post('http://localhost:8000/api/person_delete', form_data).then(
+        return axios.post(API_URL + '/api/person_delete', form_data).then(
             response => {
                 // dispatch(personDeleteSuccess(idx));
                 dispatch(getPersonList());
@@ -534,7 +533,7 @@ export const personInitCountFailure = () => {
 export const onPersonInitCount = () => {
     return (dispatch) => {
         dispatch(personInitCount());
-        return axios.post('http://localhost:8000/api/person_init_count').then(
+        return axios.post(API_URL + '/api/person_init_count').then(
             response => {
                 // reducer에서 처리할게 없다. 그냥 새로이 person_list만 불러오자.
                 dispatch(getPersonList());
@@ -591,7 +590,7 @@ export const onChangeSelect = (event_idx, event_attendance_obj) => {
         form_data.append('event_attendance_id', event_attendance_obj.event_attendance_id);
         form_data.append('product_id', event_attendance_obj.product_id);
         form_data.append('event_id', event_attendance_obj.event_id);
-        return axios.post('http://localhost:8000/api/event_attendance_update', form_data).then(
+        return axios.post(API_URL + '/api/event_attendance_update', form_data).then(
             response => {
                 if(response.data.status == 0) {
                     dispatch(eventAttendanceUpdateSuccess(response.data, event_idx));
@@ -635,7 +634,7 @@ export const onDeleteEvent = (id, idx) => {
         dispatch(eventDelete());
         const form_data = new FormData();
         form_data.append('id', id);
-        return axios.post('http://localhost:8000/api/event_delete', form_data).then(
+        return axios.post(API_URL + '/api/event_delete', form_data).then(
             response => {
                 dispatch(eventDeleteSuccess(idx));
                 dispatch(getPersonList());

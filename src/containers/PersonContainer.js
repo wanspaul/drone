@@ -29,6 +29,8 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(actions.onDeletePerson(id, idx));
     },
     onPersonInitCount: () => {
+        if(!window.confirm("초기화 하시겠습니까?"))
+            return false;
         dispatch(actions.onPersonInitCount());
     }
 });

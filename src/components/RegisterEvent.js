@@ -232,7 +232,6 @@ class RegisterEvent extends Component {
                                     </thead>
                                     <tbody>
                                         {person_list.filter(p => p.name.indexOf(this.state.keyword) !== -1).map((person, i) => {
-                                            console.log(person.idx);
                                         return (
                                             <tr key={i}>
                                                 <td>{person.name}</td>
