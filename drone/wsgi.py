@@ -13,7 +13,7 @@ import socket
 from django.core.wsgi import get_wsgi_application
 
 if os.environ.get('DJANGO_SETTINGS_MODULE') is None:
-    if socket.gethostname() == 'ec2-52-78-93-33.ap-northeast-2.compute.amazonaws.com' or socket.gethostname('ip-172-31-2-13'):
+    if socket.gethostname() == 'ec2-52-78-93-33.ap-northeast-2.compute.amazonaws.com' or socket.gethostname() == 'ip-172-31-2-13':
         print('production setting')
         os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'drone.settings.production')
     else:
