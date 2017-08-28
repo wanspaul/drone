@@ -31,10 +31,20 @@ class EventDetail extends Component {
                 </FormGroup> */}
                 <FormGroup>
                     <Col sm={2} className="text-right">
-                        <strong>메모</strong>
+                        <strong>메모1</strong>
                     </Col>
                     <Col sm={10}>
                         {event.third.split('\n').map((item, key) => {
+                            return <span key={key}>{item}<br/></span>
+                        })}
+                    </Col>
+                </FormGroup>
+                <FormGroup>
+                    <Col sm={2} className="text-right">
+                        <strong>메모2</strong>
+                    </Col>
+                    <Col sm={10}>
+                        {event.second.split('\n').map((item, key) => {
                             return <span key={key}>{item}<br/></span>
                         })}
                     </Col>
