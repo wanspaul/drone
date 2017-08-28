@@ -162,7 +162,7 @@ class RegisterEvent extends Component {
                                 />
                             </Col>
                         </FormGroup>
-                        <FormGroup controlId="formHorizontalFirst">
+                        {/* <FormGroup controlId="formHorizontalFirst">
                             <Col componentClass={ControlLabel} sm={2}>
                                 이번시간
                             </Col>
@@ -193,18 +193,19 @@ class RegisterEvent extends Component {
                                     onChange={(obj) => onChangeDateTime(obj, "second")}
                                 />
                             </Col>
-                        </FormGroup>
-                        <FormGroup controlId="formHorizontalFirst">
+                        </FormGroup> */}
+                        <FormGroup controlId="formHorizontalThird">
                             <Col componentClass={ControlLabel} sm={2}>
                                 메모
                             </Col>
                             <Col sm={10}>
                                 <FormControl 
-                                    type="text" 
+                                    componentClass="textarea" 
                                     placeholder="메모" 
                                     data-key="third"
                                     value={input_event.third}
                                     onChange={onChangeInputEvent}
+                                    style={{height:"200px"}}
                                 />
                             </Col>
                         </FormGroup>
@@ -265,8 +266,6 @@ class RegisterEvent extends Component {
                                     onClick={
                                         () => onClickEventSave(
                                             input_event.title,
-                                            input_event.first,
-                                            input_event.second,
                                             input_event.third,
                                             person_list,
                                             this.onSaveComplete

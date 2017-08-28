@@ -29,11 +29,11 @@ const mapDispatchToProps = (dispatch) => ({
                 dispatch(actions.onChangeDateTime(moment_obj, "second"));
         }
     },
-    onClickEventSave : (title, first, second, third, checked_person_list, callback) => {
+    onClickEventSave : (title, third, checked_person_list, callback) => {
         const event_obj = {
             title: title,
-            first: first,
-            second: second,
+            first: '',
+            second: '',
             third: third,
             checked_person_list: checked_person_list
         }

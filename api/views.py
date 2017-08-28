@@ -658,8 +658,6 @@ class SignIn(APIView):
 
         password = request.POST.get('password')
 
-        print(password)
-
         api_result = APIResult()
 
         if settings.PASSWORD == password:

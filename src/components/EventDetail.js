@@ -13,7 +13,7 @@ class EventDetail extends Component {
         // console.log('eventdetail');
         return (
             <Form horizontal>
-                <FormGroup>
+                {/* <FormGroup>
                     <Col sm={2} className="text-right">
                         <strong>이번시간</strong>
                     </Col>
@@ -28,13 +28,15 @@ class EventDetail extends Component {
                     <Col sm={10}>
                         {event.second}
                     </Col>
-                </FormGroup>
+                </FormGroup> */}
                 <FormGroup>
                     <Col sm={2} className="text-right">
                         <strong>메모</strong>
                     </Col>
                     <Col sm={10}>
-                        {event.third}
+                        {event.third.split('\n').map((item, key) => {
+                            return <span key={key}>{item}<br/></span>
+                        })}
                     </Col>
                 </FormGroup>
                 <FormGroup>
