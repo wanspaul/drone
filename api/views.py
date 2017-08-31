@@ -429,9 +429,9 @@ class EventAttendanceUpdate(APIView):
             person = db.person.find_one(event_attendance.get('person_id'))
 
             # 2. 당첨 기준 확인
-            if event_attendance.get('product_id') == '' and person.get('win_prize_count') > 1:
+            if event_attendance.get('product_id') == '' and person.get('win_prize_count') > 2:
                 api_result.status = APIStatusCode.ERROR
-                api_result.message = '이번 달 당첨 가능한 횟수를 초과하였습니다. (한달 2회까지 가능)'
+                api_result.message = '이번 달 당첨 가능한 횟수를 초과하였습니다. (한달 3회까지 가능)'
                 return Response(APIResultSerializer(api_result).data)
 
             # 3. 조건에 따라 당첨횟수 증감
