@@ -98,7 +98,7 @@ class PersonList(APIView):
         api_result = APIResult()
         result_list = []
         try:
-            person_list = db.person.find({'active': True})
+            person_list = db.person.find({'active': True}).sort('name', pymongo.ASCENDING)
             # 도저히 SavePerson에서 ObjectId 값을 Object 로 넘기는 방법을 모르겠어서, 실제 Id 값만 스트링 형태로 다시 바꿔서 넘겨주는 것으로 통일한다.
             idx = 0 # for search person
             for person in person_list:
