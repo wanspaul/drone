@@ -267,7 +267,7 @@ class EventList(APIView):
         api_result = APIResult()
         result_list = []
         try:
-            event_list = db.event.find({'active': True}).sort('create_dt', pymongo.DESCENDING)
+            event_list = db.event.find({'active': True}).sort('create_dt', pymongo.DESCENDING)[:20]
             # 도저히 SavePerson에서 ObjectId 값을 Object 로 넘기는 방법을 모르겠어서, 실제 Id 값만 스트링 형태로 다시 바꿔서 넘겨주는 것으로 통일한다.
             for event in event_list:
 
