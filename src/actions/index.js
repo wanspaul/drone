@@ -58,7 +58,8 @@ export const onClickEventSave = (event_obj, callback) => {
         form_data.append('checked_person_list', JSON.stringify(event_obj.checked_person_list));
         return axios.post(API_URL + '/api/save_event', form_data).then(
             response => {
-                dispatch(saveEventSuccess(response.data));
+                // dispatch(saveEventSuccess(response.data));
+                dispatch(getEventList(1));
                 dispatch(initPersonAttendance());
                 dispatch(getPersonList());
                 callback();
@@ -122,13 +123,13 @@ export const onClickProductSave = (product_obj) => {
 
 
 // Event List Action
-export const getEventList = () => {
+export const getEventList = (page) => {
     
     return (dispatch) => {
         dispatch(eventList());
-        return axios.get(API_URL + '/api/event_list').then(
+        return axios.get(API_URL + '/api/event_list?page=' + page).then(
             response => {
-                dispatch(eventListSuccess(response.data));
+                dispatch(eventListSuccess(response.data, page));
             }
         ).catch(
             error => {
@@ -144,10 +145,12 @@ export const eventList = () => {
     };
 }
 
-export const eventListSuccess = (response) => {
+export const eventListSuccess = (response, page) => {
     return {
         type: eventTypes.EVENT_LIST_SUCCESS,
-        event_list: response.data.event_list
+        event_list: response.data.event_list,
+        page : page,
+        total_page: response.data.total_page
     };
 }
 

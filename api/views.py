@@ -260,14 +260,19 @@ class SaveEvent(APIView):
 
 class EventList(APIView):
 
+    paging_size = 20
+
     def get(self, request):
+        page = int(request.GET.get('page', 1))
         client = MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
         db = client['drone']
 
         api_result = APIResult()
         result_list = []
         try:
-            event_list = db.event.find({'active': True}).sort('create_dt', pymongo.DESCENDING)[:20]
+            total_count = db.event.find({'active': True}).count()
+            total_page = np.math.ceil(total_count / self.paging_size)
+            event_list = db.event.find({'active': True}).skip(self.paging_size * (page-1)).limit(self.paging_size).sort('create_dt', pymongo.DESCENDING)
             # 도저히 SavePerson에서 ObjectId 값을 Object 로 넘기는 방법을 모르겠어서, 실제 Id 값만 스트링 형태로 다시 바꿔서 넘겨주는 것으로 통일한다.
             for event in event_list:
 
@@ -299,6 +304,7 @@ class EventList(APIView):
                     'b_count': event.get('b_count'),
                 })
 
+            api_result.add_object('total_page', total_page)
             api_result.add_object('event_list', result_list)
             api_result.message = APIStatusMessage.SUCCESS
         except:

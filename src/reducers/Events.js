@@ -13,6 +13,8 @@ const initialState = {
         name: ''
     },
     event_list: [],
+    page: 1,
+    total_page: 0,
     product_list: []
 };
 
@@ -46,7 +48,9 @@ function Events(state=initialState, action) {
         case eventTypes.EVENT_LIST_SUCCESS:
             return {
                 ...state,
-                event_list: eval(action.event_list)
+                event_list: eval(action.event_list),
+                page: action.page,
+                total_page: action.total_page
             }
         case eventTypes.PRODUCT_LIST_SUCCESS:
             return {

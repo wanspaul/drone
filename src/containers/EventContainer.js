@@ -13,6 +13,8 @@ const mapStateToProps = (state) => ({
         name: state.Events.input_product.name
     },
     event_list : state.Events.event_list,
+    page : state.Events.page,
+    total_page : state.Events.total_page,
     product_list: state.Events.product_list
 });
 
@@ -52,8 +54,15 @@ const mapDispatchToProps = (dispatch) => ({
         }
         dispatch(actions.onClickProductSave(product_obj));
     },
-    getEventList : () => {
-        dispatch(actions.getEventList());
+    getEventList : (page = 1) => {
+        dispatch(actions.getEventList(page));
+    },
+    onPreviousPage : (page) => {
+        if(page > 1)
+            dispatch(actions.getEventList(page - 1));
+    },
+    onNextPage : (page) => {
+        dispatch(actions.getEventList(page + 1));
     },
     getProductList : () => {
         dispatch(actions.getProductList());

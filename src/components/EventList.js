@@ -8,7 +8,7 @@ import * as actions from '../actions';
 
 const EventList = ({event_list, product_list, onChangeSelect, onDeleteEvent}) => {
     return (
-        <PanelGroup defaultActiveKey="0" accordion>
+        <PanelGroup defaultActiveKey="0" accordion style={{clear:"both"}}>
             {event_list.map((event, i) => {
                 return (
                     <Panel key={i} header={event.title} eventKey={i.toString()}>
