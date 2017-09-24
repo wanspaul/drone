@@ -31,11 +31,16 @@ const mapDispatchToProps = (dispatch) => ({
                 dispatch(actions.onChangeDateTime(moment_obj, "second"));
         }
     },
-    onClickEventSave : (title, second, third, checked_person_list, callback) => {
+    onClickEventSave : (title, second, third, person_list, callback) => {
         if(title === '') {
             window.alert('제목을 입력해주세요.');
             return false;
         }
+        
+        let checked_person_list = person_list.filter(function(obj) {
+            return obj.is_attendance;
+        });
+        
         const event_obj = {
             title: title,
             first: '',
